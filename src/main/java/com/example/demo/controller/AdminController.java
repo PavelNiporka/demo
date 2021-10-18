@@ -8,9 +8,12 @@ import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,13 +23,20 @@ import java.util.Optional;
 @Controller
 public class AdminController {
 
-    public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
+    //public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
+
+
+    File path = new File(ResourceUtils.getURL("classpath:static/productImages").getPath()).getAbsoluteFile();
+    String uploadDir = path.getAbsolutePath();
 
     @Autowired
     CategoryService categoryService;
 
     @Autowired
     ProductService productService;
+
+    public AdminController() throws FileNotFoundException {
+    }
 
     @GetMapping("/admin")
     public String adminHome() {
@@ -88,9 +98,9 @@ public class AdminController {
                                  @RequestParam("imgName") String imgName) throws IOException {
         Product product = new Product();
         product.setId(productDTO.getId());
-        product.setName(product.getName());
+        product.setName(productDTO.getName());
         product.setCategory(categoryService.getCategoryById(productDTO.getCategoryId()).get());
-        product.setPrice(product.getPrice());
+        product.setPrice(productDTO.getPrice());
         product.setWeight(productDTO.getWeight());
         product.setDescription(productDTO.getDescription());
         String imageUUID;
@@ -104,6 +114,31 @@ public class AdminController {
         product.setImageName(imageUUID);
         productService.addProduct(product);
         return "redirect:/admin/products";
+    }
+
+    @GetMapping("/admin/product/delete/{id}")
+    public String deleteProduct(@PathVariable long id) {
+        productService.removeProductById(id);
+        return "redirect:/admin/products";
+    }
+
+    @GetMapping("/admin/product/update/{id}")
+    public String getProductUpdate(@PathVariable long id, Model model) {
+        Product product = productService.getProductById(id).get();
+        ProductDTO productDTO = new ProductDTO();
+        productDTO.setId(product.getId());
+        productDTO.setName(product.getName());
+        productDTO.setCategoryId(product.getCategory().getId());
+        productDTO.setPrice(product.getPrice());
+        productDTO.setWeight(product.getWeight());
+        productDTO.setDescription(product.getDescription());
+        productDTO.setImageName(product.getImageName());
+
+        model.addAttribute("categories", categoryService.getAllCategory());
+        model.addAttribute("productDTO", productDTO);
+
+        return "productsAdd";
+
     }
 
 
