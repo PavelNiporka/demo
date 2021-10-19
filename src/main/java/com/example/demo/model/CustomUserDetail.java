@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomerUserDetail extends User implements UserDetails {
-    public CustomerUserDetail(User user) {
+public class CustomUserDetail extends User implements UserDetails {
+    public CustomUserDetail(User user) {
         super(user);
     }
 

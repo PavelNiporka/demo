@@ -31,8 +31,8 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request,
-                                        HttpServletResponse response, FilterChain chain,
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
+                                        HttpServletResponse httpServletResponse, FilterChain chain,
                                         Authentication authentication) throws IOException, ServletException {
         OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
         String email = token.getPrincipal().getAttributes().get("email").toString();
@@ -50,6 +50,8 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
             userRepository.save(user);
 
         }
+
+        redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/");
 
 
     }
