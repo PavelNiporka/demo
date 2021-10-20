@@ -1,0 +1,13 @@
+2021-10-20 09:51:21 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO ROLES(ID, NAME)VALUE[*]
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER')"; expected "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, TABLE, VALUES"; SQL statement:
+INSERT INTO roles(id, name)VALUE
+(1, 'ROLE_ADMIN'),
+(2, 'ROLE_USER') [42001-200]
+2021-10-20 11:26:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM PRODUCT DESCRIPTION IMAGE_NAME[*] NAME PRICE"; SQL statement:
+SELECT * FROM PRODUCT DESCRIPTION IMAGE_NAME NAME PRICE [42000-200]
+2021-10-20 11:26:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "NAME[*] PRICE WEIGHT"; SQL statement:
+NAME PRICE WEIGHT [42000-200]
