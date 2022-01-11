@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.global.GlobalData;
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
 import com.example.demo.repository.RoleRepository;
@@ -21,6 +22,7 @@ import java.util.List;
 public class LoginController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -28,6 +30,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
+        GlobalData.cart.clear();
         return "login";
     }
 
@@ -35,6 +38,11 @@ public class LoginController {
     public String registerGet() {
         return "register";
 
+    }
+
+    @GetMapping("/password")
+    public String passwordGet() {
+        return "password";
     }
 
     @PostMapping("/register")

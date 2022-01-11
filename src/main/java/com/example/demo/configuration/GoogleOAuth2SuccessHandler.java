@@ -28,7 +28,7 @@ public class GoogleOAuth2SuccessHandler implements AuthenticationSuccessHandler 
     @Autowired
     UserRepository userRepository;
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+    private  RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
