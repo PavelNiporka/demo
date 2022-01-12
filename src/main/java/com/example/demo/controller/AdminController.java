@@ -23,8 +23,6 @@ import java.util.Optional;
 @Controller
 public class AdminController {
 
-    //public static String uploadDir = System.getProperty("user.dir") + "/src/main/resources/static/productImages";
-
 
     File path = new File(ResourceUtils.getURL("classpath:static/productImages").getPath()).getAbsoluteFile();
     String uploadDir = path.getAbsolutePath();

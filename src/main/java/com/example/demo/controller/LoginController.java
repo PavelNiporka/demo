@@ -45,6 +45,11 @@ public class LoginController {
         return "password";
     }
 
+    @GetMapping("/forgot-passsword")
+    public String forgotPassword() {
+        return "forgot-password";
+    }
+
     @PostMapping("/register")
     public String registerPost(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
         String password = user.getPassword();
