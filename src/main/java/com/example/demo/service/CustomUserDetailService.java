@@ -22,6 +22,15 @@ public class CustomUserDetailService implements UserDetailsService {
         user.orElseThrow(() -> new UsernameNotFoundException("User not found!"));
         return user.map(CustomUserDetail::new).get();
     }
+    public boolean addUser(User user){
+        Optional<User> userFromDB = userRepository.findUserByEmail(user.getEmail());
+        if (userFromDB.isPresent()){
+            return false;
+        }
+
+    }
+
+
 
 
 }
