@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -63,7 +64,6 @@ public class AdminController {
     public String deleteCategory(@PathVariable int id) {
         categoryService.removeCategoryById(id);
         return "redirect:/admin/categories";
-
     }
 
     @GetMapping("/admin/categories/update/{id}")
